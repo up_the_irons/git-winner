@@ -1,0 +1,42 @@
+=============
+git-winner.sh
+=============
+
+Usage::
+
+  cd <path-to-git-repo>
+  git-winner.sh <date>
+
+Watch what happens!
+
+Example::
+
+  $ cd ~/dev/ebay4r
+  $ git-winner.sh 01-01-1970
+
+  Activity after 01-01-1970
+
+  Results for Andriy Tyurnikov:
+    # of commits        : 4
+    # of lines committed: 17188
+  Results for Dmitry Vazhov:
+    # of commits        : 1
+    # of lines committed: 12
+  Results for Garry Dolley:
+    # of commits        : 139
+    # of lines committed: 45498
+  Results for Woody Peterson:
+    # of commits        : 4
+    # of lines committed: 9674
+
+  Garry Dolley wins in commit count with 139 commits!
+  Garry Dolley wins in number of lines commited with 45498 lines!
+
+  Garry is the overall winner!!
+  $
+
+Play with your friends!
+
+Copyright (c) 2008 Garry C. Dolley
+
+Released under the MIT license.
