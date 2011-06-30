@@ -3,7 +3,9 @@
 usage() {
   echo "git-winner by Garry Dolley (http://scie.nti.st)"
   echo ""
-  echo "Usage: $0 [date]"
+  echo "Usage: $0 [date] [--detail]"
+  echo ""
+  echo "  --detail shows a shortlog of commits in the results"
   exit
 }
 
@@ -16,6 +18,10 @@ if [ -n "$1" ]; then
   DATE=$1
 else
   DATE=$(date +%m-%d-%Y) # Today
+fi
+
+if [ "$2" = "--detail" ]; then
+  DETAIL=y
 fi
 
 PLAYERS=$(git shortlog --all --after=$DATE | grep '^\w' | sed 's/\(.*\) ([0-9]*):/\1/')
@@ -61,6 +67,13 @@ for player in $PLAYERS; do
   echo "Results for $player:"
   echo "  # of commits        : $COMMIT_COUNT"
   echo "  # of lines committed: $COMMIT_LINES"
+
+  if [ -n "$DETAIL" ]; then
+    echo ""
+    echo "  Commit summary"
+    echo ""
+    git shortlog --all --after=$DATE --author="$player" -w | grep -v ^"$player"
+  fi
 done
 
 if [ "$HIGHEST_COMMIT_COUNT" -gt 0 ]; then
