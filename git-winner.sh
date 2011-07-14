@@ -24,7 +24,7 @@ if [ "$2" = "--detail" ]; then
   DETAIL=y
 fi
 
-PLAYERS=$(git shortlog --all --after=$DATE | grep '^\w' | sed 's/\(.*\) ([0-9]*):/\1/')
+PLAYERS=$(git shortlog --all --after="$DATE 00:00:00" | grep '^\w' | sed 's/\(.*\) ([0-9]*):/\1/')
 
 HIGHEST_COMMIT_COUNT=0
 HIGHEST_COMMIT_LINES=0
@@ -43,8 +43,8 @@ IFS='
 '
 
 for player in $PLAYERS; do
-  COMMIT_COUNT=$(git shortlog --all --after=$DATE --author="$player" -w | grep ^"$player (" | sed "s/$player (\(.*\)):/\1/")
-  COMMIT_LINES=$(git log      --all --after=$DATE --author="$player" --pretty=format: --stat --diff-filter=M -w | grep '[0-9]* files changed, [0-9]* insertions.*, [0-9]* deletions' | awk '{ sum += $4 + $6} END { print sum }')
+  COMMIT_COUNT=$(git shortlog --all --after="$DATE 00:00:00" --author="$player" -w | grep ^"$player (" | sed "s/$player (\(.*\)):/\1/")
+  COMMIT_LINES=$(git log      --all --after="$DATE 00:00:00" --author="$player" --pretty=format: --stat --diff-filter=M -w | grep '[0-9]* files changed, [0-9]* insertions.*, [0-9]* deletions' | awk '{ sum += $4 + $6} END { print sum }')
 
   if [ -z "$COMMIT_COUNT" ]; then
     COMMIT_COUNT=0
@@ -72,7 +72,7 @@ for player in $PLAYERS; do
     echo ""
     echo "  Commit summary"
     echo ""
-    git shortlog --all --after=$DATE --author="$player" -w | grep -v ^"$player"
+    git shortlog --all --after="$DATE 00:00:00" --author="$player" -w | grep -v ^"$player"
   fi
 done
 
