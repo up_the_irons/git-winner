@@ -79,7 +79,7 @@ done
 if [ "$HIGHEST_COMMIT_COUNT" -gt 0 ]; then
   echo ""
   echo "$HIGHEST_COMMIT_COUNT_PLAYER wins in commit count with $HIGHEST_COMMIT_COUNT commits!"
-  echo "$HIGHEST_COMMIT_LINES_PLAYER wins in number of lines commited with $HIGHEST_COMMIT_LINES lines!"
+  echo "$HIGHEST_COMMIT_LINES_PLAYER wins in number of lines committed with $HIGHEST_COMMIT_LINES lines!"
   
   if [ "$HIGHEST_COMMIT_COUNT_PLAYER" = "$HIGHEST_COMMIT_LINES_PLAYER" ]; then
     FIRST_NAME=$(echo $HIGHEST_COMMIT_COUNT_PLAYER | awk '{ print $1 }')
